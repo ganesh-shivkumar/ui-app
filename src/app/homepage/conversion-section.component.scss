@@ -6,7 +6,7 @@
     width: 100%;
     height: 100%;
     display: grid;
-    margin: 2%;
+    margin: 2% 2% 2% 0;
 }
 
 .textarea-formfield{
@@ -23,10 +23,16 @@
     margin: 2%;
 }
 
-.top-section{
-    height: 90%;
+.details-card{
+    width: 100%;
+    height: 100%;
+    margin: 0 0 2% 2%;
+    overflow-wrap: anywhere;
 }
 
-.bottom-section{
-    height: 10%;
+.gemini-card{
+    width: 100%;
+    height: 100%;
+    margin: 4% 0 2% 2%;
+    overflow-wrap: anywhere;
 }

@@ -1,55 +1,57 @@
 <mat-grid-list cols="5" rowHeight="9%" gutterSize="0px" class="full-section">
-  <div class="top-section">
-    <mat-grid-tile [colspan]="2" [rowspan]="9">
-      <div class="top-row-card">
-        <mat-card appearance="outlined">
-          <mat-form-field appearance="outline" class="textarea-formfield">
-            <mat-label>EDI</mat-label>
-            <textarea  
-             matInput 
-             [formControl]="ediFormControl"
-             cdkTextareaAutosize
-             #autosize="cdkTextareaAutosize"
-             cdkAutosizeMinRows="1"
-             cdkAutosizeMaxRows="40"></textarea>
-          </mat-form-field>
-        </mat-card>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="2" [rowspan]="9"> 
-      <div class="top-row-card">
-        <mat-card appearance="outlined">
-          <mat-form-field appearance="outline" class="textarea-formfield">
-            <mat-label>JSON</mat-label>
-            <textarea  
-             matInput 
-             [formControl]="jsonFormControl"
-             cdkTextareaAutosize
-             #autosize="cdkTextareaAutosize"
-             cdkAutosizeMinRows="1"
-             cdkAutosizeMaxRows="40"></textarea>
-          </mat-form-field>
-        </mat-card>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="9">
-      <div class="top-row-card">
-        <mat-card appearance="outlined">
-          Chatbot
-        </mat-card>
-      </div>
-    </mat-grid-tile>
-  </div>
-  
-
-    <mat-grid-tile [colspan]="4" [rowspan]="1">
-      <button mat-flat-button>Basic</button>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <div class="bottom-row-card">
-        <mat-card appearance="outlined">
-          Ask
-        </mat-card>
-      </div>
+  <mat-grid-tile [colspan]="2" [rowspan]="9">
+    <div class="top-row-card">
+      <mat-card appearance="outlined">
+        <mat-form-field appearance="outline" class="textarea-formfield">
+          <mat-label>EDI</mat-label>
+          <textarea  
+            matInput 
+            [formControl]="ediFormControl"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="40"></textarea>
+        </mat-form-field>
+      </mat-card>
+    </div>
   </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="2" [rowspan]="9"> 
+    <div class="top-row-card">
+      <mat-card appearance="outlined">
+        <mat-form-field appearance="outline" class="textarea-formfield">
+          <mat-label>JSON</mat-label>
+          <textarea  
+            matInput 
+            [formControl]="jsonFormControl"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="40"></textarea>
+        </mat-form-field>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="1" [rowspan]="2">
+    <mat-card appearance="outlined" class="details-card">
+      <mat-card-content>
+        <p> {{details}} </p>
+      </mat-card-content>
+      <mat-card-actions *ngIf="ranTransaction">
+        <button mat-button (click)="openStatus()">Click to know more!</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="1" [rowspan]="8">
+    <mat-card appearance="outlined" class="gemini-card">
+      Ask
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="4" [rowspan]="1">
+      <button mat-flat-button (click)="convert()">Submit</button>
+  </mat-grid-tile>
+  
 </mat-grid-list>
