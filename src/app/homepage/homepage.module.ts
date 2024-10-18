@@ -8,12 +8,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DetailsDialogComponent } from './details-dialog.component';
 
 @NgModule({
   imports: [
-    CommonModule, MatGridListModule, MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule
+    CommonModule, MatGridListModule, MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatDialogModule
   ],
-  declarations: [PlaygroundComponent, ConversionSectionComponent],
-  exports : [PlaygroundComponent, ConversionSectionComponent]
+  declarations: [PlaygroundComponent, ConversionSectionComponent, DetailsDialogComponent],
+  exports : [PlaygroundComponent, ConversionSectionComponent, DetailsDialogComponent]
 })
 export class HomepageModule { }

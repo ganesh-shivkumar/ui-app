@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { ChangeDetectionStrategy, Component , inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DetailsDialogComponent } from './details-dialog.component';
 
 @Component({
   selector: 'app-conversion-section',
@@ -15,12 +17,17 @@ export class ConversionSectionComponent {
   details = '';
   ranTransaction = false;
 
+  readonly dialog = inject(MatDialog);
+
+  openStatus() {
+    const dialogRef = this.dialog.open(DetailsDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   convert(){
     this.ranTransaction = true;
     this.details = 'Analysis is complete and no errors are found!';
-  }
-
-  openStatus(){
-    this.details = "Opens!";
   }
 }
