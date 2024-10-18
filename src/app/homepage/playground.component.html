@@ -1,6 +1,8 @@
-<mat-grid-list cols="1" rowHeight="10%" class="full-section">
+<mat-grid-list cols="1" rowHeight="10%" gutterSize="0px" class="full-section">
     <mat-grid-tile [colspan]="1" [rowspan]="1" class="top-section">
-        Section 1
+        <mat-card appearance="outlined" class="header-card">
+            <mat-card-content>Simple card</mat-card-content>
+        </mat-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="9" class="bottom-section">
         <app-conversion-section class="conversion-section"></app-conversion-section>

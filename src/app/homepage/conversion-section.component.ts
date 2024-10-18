@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-conversion-section',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class ConversionSectionComponent {
 
+  readonly ediFormControl = new FormControl('', [Validators.required]);
+  readonly jsonFormControl = new FormControl('');
 }
