@@ -4,9 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DetailsDialogComponent } from './details-dialog.component';
 import { ApiService } from './api_service';
 
-export interface EchoMessage {
-  title: string;
-  message: string;
+export interface DialogData  {
+  dialogDetails: string;
 }
 
 @Component({
@@ -19,16 +18,22 @@ export class ConversionSectionComponent {
 
   constructor(private apiservice:ApiService) { }
 
-  readonly ediFormControl = new FormControl('', [Validators.required]);
-  readonly jsonFormControl = new FormControl('');
+  ediFormControl = new FormControl('');
+  jsonFormControl = new FormControl('');
 
   details = '';
+  dialogDetails = ''
   ranTransaction = false;
 
   readonly dialog = inject(MatDialog);
 
   openStatus() {
-    const dialogRef = this.dialog.open(DetailsDialogComponent);
+    console.log(this.dialogDetails);
+    const dialogRef = this.dialog.open(DetailsDialogComponent,  {
+      data: {
+        dialogDetails: this.dialogDetails,
+      },
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -36,12 +41,13 @@ export class ConversionSectionComponent {
   }
   convert(){
     this.ranTransaction = true;
-    this.apiservice.getdata().subscribe(data => {
-      console.log('data --->>> ' + data);
-      
-      const jsonResponse : EchoMessage= JSON.parse(data)
-      console.log('jsonResponse --->>> ' + jsonResponse.message);
-      this.details = data.toString();
-    });
+    if(this.ediFormControl.value){
+      this.apiservice.getdata(this.ediFormControl.value).subscribe(data => {
+        data.replace("\n", "<br>");
+        this.dialogDetails = data;
+        console.log('this.dialogDetails --->>> ' + this.dialogDetails);
+        this.details = 'Success';
+      });
+    }
   }
 }
