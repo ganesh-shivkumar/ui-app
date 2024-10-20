@@ -17,4 +17,10 @@ export class PlaygroundComponent {
     { cols: 1, rows: 1 },
   ];
 
+  inprogress = false;
+  checkApiCallStatus($event: any){
+    this.inprogress = $event;
+  }
+
+
 }

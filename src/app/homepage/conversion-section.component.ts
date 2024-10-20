@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component , inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component , EventEmitter, inject, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsDialogComponent } from './details-dialog.component';
@@ -16,6 +16,8 @@ export interface DialogData  {
 })
 export class ConversionSectionComponent {
 
+  @Output() childComponentValue = new EventEmitter<any>();
+
   constructor(private apiservice:ApiService) { }
 
   ediFormControl = new FormControl('');
@@ -28,7 +30,6 @@ export class ConversionSectionComponent {
   readonly dialog = inject(MatDialog);
 
   openStatus() {
-    console.log(this.dialogDetails);
     const dialogRef = this.dialog.open(DetailsDialogComponent,  {
       data: {
         dialogDetails: this.dialogDetails,
@@ -39,14 +40,22 @@ export class ConversionSectionComponent {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+  sendToParent(value : boolean) {
+    this.childComponentValue.emit(value);
+  }
+
+
   convert(){
     this.ranTransaction = true;
     if(this.ediFormControl.value){
-      this.apiservice.getdata(this.ediFormControl.value).subscribe(data => {
-        data.replace("\n", "<br>");
-        this.dialogDetails = data;
-        console.log('this.dialogDetails --->>> ' + this.dialogDetails);
+      this.sendToParent(true);
+      this.apiservice.getdata(this.ediFormControl.value).subscribe(data => {  
+        this.dialogDetails = data.replace(/\"```json/g,"");
+        this.dialogDetails = this.dialogDetails.replace(/```\"/g,"");
+        this.dialogDetails = this.dialogDetails.replace(/\\/g,"");
         this.details = 'Success';
+        this.sendToParent(false);
       });
     }
   }

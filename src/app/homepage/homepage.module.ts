@@ -10,10 +10,20 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DetailsDialogComponent } from './details-dialog.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
-    CommonModule, MatGridListModule, MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatDialogModule
+    CommonModule,
+    MatGridListModule,
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatProgressBarModule
   ],
   declarations: [PlaygroundComponent, ConversionSectionComponent, DetailsDialogComponent],
   exports : [PlaygroundComponent, ConversionSectionComponent, DetailsDialogComponent]

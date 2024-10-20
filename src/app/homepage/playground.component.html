@@ -1,3 +1,4 @@
+<mat-progress-bar *ngIf="inprogress" mode="indeterminate"></mat-progress-bar>
 <mat-grid-list cols="1" rowHeight="10%" gutterSize="0px" class="full-section">
     <mat-grid-tile [colspan]="1" [rowspan]="1" class="top-section">
         <mat-card appearance="outlined" class="header-card">
@@ -7,6 +8,6 @@
         </mat-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="9" class="bottom-section">
-        <app-conversion-section class="conversion-section"></app-conversion-section>
+        <app-conversion-section  class="conversion-section" (childComponentValue)="checkApiCallStatus($event)"></app-conversion-section>
     </mat-grid-tile>    
 </mat-grid-list>
