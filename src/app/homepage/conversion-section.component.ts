@@ -2,6 +2,12 @@ import { ChangeDetectionStrategy, Component , inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsDialogComponent } from './details-dialog.component';
+import { ApiService } from './api_service';
+
+export interface EchoMessage {
+  title: string;
+  message: string;
+}
 
 @Component({
   selector: 'app-conversion-section',
@@ -10,6 +16,8 @@ import { DetailsDialogComponent } from './details-dialog.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConversionSectionComponent {
+
+  constructor(private apiservice:ApiService) { }
 
   readonly ediFormControl = new FormControl('', [Validators.required]);
   readonly jsonFormControl = new FormControl('');
@@ -28,6 +36,12 @@ export class ConversionSectionComponent {
   }
   convert(){
     this.ranTransaction = true;
-    this.details = 'Analysis is complete and no errors are found!';
+    this.apiservice.getdata().subscribe(data => {
+      console.log('data --->>> ' + data);
+      
+      const jsonResponse : EchoMessage= JSON.parse(data)
+      console.log('jsonResponse --->>> ' + jsonResponse.message);
+      this.details = data.toString();
+    });
   }
 }
