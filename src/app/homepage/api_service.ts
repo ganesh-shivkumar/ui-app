@@ -8,9 +8,17 @@ export class ApiService {
 
     constructor(private _http: HttpClient) { }
 
-    getdata(body: string) : Observable<string>{
-      return this._http.post('http://127.0.0.1:5000/api/data', body , {responseType: 'text'});//,{ headers: new HttpHeaders({ 'Content-Type': 'text/plain' }) , responseType: 'text'});
-      }
+    getData(body: string) {
+      return this._http.post('http://127.0.0.1:5000/api/data', body);
+    }
+
+    trainData() {
+      return this._http.get('http://127.0.0.1:5000/api/train');
+    }
+
+    getLatestTunedModel() {
+      return this._http.get('http://127.0.0.1:5000/api/tunedmodels/latest');
+    }
       
 }
   

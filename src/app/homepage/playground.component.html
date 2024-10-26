@@ -2,8 +2,20 @@
 <mat-grid-list cols="1" rowHeight="10%" gutterSize="0px" class="full-section">
     <mat-grid-tile [colspan]="1" [rowspan]="1" class="top-section">
         <mat-card appearance="outlined" class="header-card">
-            <mat-card-header>
-                <mat-card-title>EDI to JSON Converter</mat-card-title>
+            <mat-card-header class="header-section">
+                <mat-card-title-group>
+                    <div class="text-section">
+                        <mat-card-title>EDI to JSON Converter</mat-card-title>
+                    </div>
+                    <div class="button-section">
+                        <button mat-fab extended aria-label="Icon for triggering tuning" color="primary" (click)="trainModel()">
+                            <mat-icon color="primary">autorenew</mat-icon> Train Model
+                        </button>
+                        <button mat-icon-button aria-label="Info button to get the tuned model name" (click)="openDialog(tunedmodelDetails)">
+                            <mat-icon color="primary">info</mat-icon>
+                        </button>                    
+                    </div>
+                </mat-card-title-group>
             </mat-card-header>
         </mat-card>
     </mat-grid-tile>

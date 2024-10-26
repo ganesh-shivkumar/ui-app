@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component , EventEmitter, inject, Output } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsDialogComponent } from './details-dialog.component';
 import { ApiService } from './api_service';
@@ -50,10 +50,13 @@ export class ConversionSectionComponent {
     this.ranTransaction = true;
     if(this.ediFormControl.value){
       this.sendToParent(true);
-      this.apiservice.getdata(this.ediFormControl.value).subscribe(data => {  
-        this.dialogDetails = data.replace(/\"```json/g,"");
-        this.dialogDetails = this.dialogDetails.replace(/```\"/g,"");
-        this.dialogDetails = this.dialogDetails.replace(/\\/g,"");
+      this.apiservice.getData(this.ediFormControl.value).subscribe(data => {  
+        this.dialogDetails = data.toString();
+
+        let json = data.toString().replace(/```json/g,"");
+        json = json.substring(0, json.indexOf("```"));
+        this.jsonFormControl.setValue(json);
+
         this.details = 'Success';
         this.sendToParent(false);
       });
