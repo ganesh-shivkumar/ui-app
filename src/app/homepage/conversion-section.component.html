@@ -47,7 +47,26 @@
 
   <mat-grid-tile [colspan]="1" [rowspan]="8">
     <mat-card appearance="outlined" class="gemini-card">
-      Ask
+      <mat-card-header>
+        <div>
+          <mat-card-subtitle>Ask Gemini!</mat-card-subtitle>
+        </div>
+        <div class="gemini-icon">
+          <mat-icon aria-label="Gemini" fontIcon="chat_bubble" color="primary"></mat-icon>
+        </div>
+        
+      </mat-card-header>
+      <mat-card-content class="gemini-chat-section">
+        Content
+      </mat-card-content>
+      <mat-card-footer class="gemini-input-section">
+        <mat-form-field appearance="outline" class="chat-input-section">
+          <textarea matInput></textarea>
+        </mat-form-field>
+        <button mat-icon-button class="chat-button-section" color="primary">
+          <mat-icon>send</mat-icon>
+        </button>
+      </mat-card-footer>
     </mat-card>
   </mat-grid-tile>
 
