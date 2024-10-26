@@ -10,9 +10,4 @@ import {
 })
 export class DetailsDialogComponent {
   data = inject(MAT_DIALOG_DATA);
-
-
-  openDialog(){
-    
-  }
 }

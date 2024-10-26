@@ -53,11 +53,15 @@ export class ConversionSectionComponent {
       this.apiservice.getData(this.ediFormControl.value).subscribe(data => {  
         this.dialogDetails = data.toString();
 
-        let json = data.toString().replace(/```json/g,"");
-        json = json.substring(0, json.indexOf("```"));
+        let json = data.toString();
+        if(json.includes('```json')){
+          json = json.replace(/```json/g,"");
+          json = json.substring(0, json.indexOf("```"));
+        }
         this.jsonFormControl.setValue(json);
 
-        this.details = 'Success';
+
+        this.details = 'Completed!';
         this.sendToParent(false);
       });
     }
