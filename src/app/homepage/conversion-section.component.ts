@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component , EventEmitter, inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component , EventEmitter, inject, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsDialogComponent } from './details-dialog.component';
@@ -18,7 +18,7 @@ export class ConversionSectionComponent {
 
   @Output() childComponentValue = new EventEmitter<any>();
 
-  constructor(private apiservice:ApiService) { }
+  constructor(private apiservice:ApiService, private changeDetectorRef : ChangeDetectorRef) { }
 
   ediFormControl = new FormControl('');
   jsonFormControl = new FormControl('');
@@ -28,6 +28,8 @@ export class ConversionSectionComponent {
   ranTransaction = false;
 
   readonly dialog = inject(MatDialog);
+
+  results : string[] = ['1111111','2222222222','33333333333333'];
 
   openStatus() {
     const dialogRef = this.dialog.open(DetailsDialogComponent,  {
@@ -45,6 +47,18 @@ export class ConversionSectionComponent {
     this.childComponentValue.emit(value);
   }
 
+  callGemini(){
+    this.ranTransaction = true;
+    const geminiPayloads = {
+      "edi" : this.ediFormControl.value,
+      "json" : this.jsonFormControl.value
+    }
+    this.apiservice.callGemini(JSON.stringify(geminiPayloads)).subscribe(data => {
+      this.results.push(data.toString());
+      this.ranTransaction = false;
+      this.changeDetectorRef.detectChanges();
+    })
+  }
 
   convert(){
     this.ranTransaction = true;

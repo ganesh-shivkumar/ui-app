@@ -19,6 +19,10 @@ export class ApiService {
     getLatestTunedModel() {
       return this._http.get('http://127.0.0.1:5000/api/tunedmodels/latest');
     }
+
+    callGemini(body: string) {
+      return this._http.post('http://127.0.0.1:5000/api/chat', body);
+    }
       
 }
   

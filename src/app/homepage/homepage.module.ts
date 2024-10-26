@@ -11,7 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DetailsDialogComponent } from './details-dialog.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import  {MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import  {MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     MatDialogModule,
     MatProgressBarModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule
   ],
   declarations: [PlaygroundComponent, ConversionSectionComponent, DetailsDialogComponent],
   exports : [PlaygroundComponent, ConversionSectionComponent, DetailsDialogComponent]

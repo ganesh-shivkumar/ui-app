@@ -40,6 +40,7 @@
 .gemini-chat-section{
     height: 75%;
     padding: 0 8px;
+    overflow-y: scroll;
 }
 
 .gemini-icon{
@@ -57,4 +58,9 @@
 
 .chat-button-section{
     width: 20%;
+}
+
+.chat-card{
+    margin: 2px;
+    padding: 0;
 }
