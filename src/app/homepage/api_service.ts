@@ -1,7 +1,5 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-
 
 @Injectable({providedIn: 'root'})
 export class ApiService {
@@ -21,7 +19,8 @@ export class ApiService {
     }
 
     callGemini(body: string) {
-      return this._http.post('http://127.0.0.1:5000/api/chat', body);
+      const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+      return this._http.post('http://127.0.0.1:5000/api/chat', body, {headers : headers});
     }
       
 }

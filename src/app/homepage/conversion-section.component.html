@@ -66,7 +66,7 @@
       </mat-card-content>
       <mat-card-footer class="gemini-input-section">
         <mat-form-field appearance="outline" class="chat-input-section">
-          <textarea matInput></textarea>
+          <textarea matInput [formControl]="chatInputFormControl"></textarea>
         </mat-form-field>
         <button mat-icon-button class="chat-button-section" color="primary" (click)="callGemini()">
           <mat-icon>send</mat-icon>

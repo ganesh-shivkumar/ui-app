@@ -22,6 +22,7 @@ export class ConversionSectionComponent {
 
   ediFormControl = new FormControl('');
   jsonFormControl = new FormControl('');
+  chatInputFormControl = new FormControl('');
 
   details = '';
   dialogDetails = ''
@@ -51,7 +52,8 @@ export class ConversionSectionComponent {
     this.ranTransaction = true;
     const geminiPayloads = {
       "edi" : this.ediFormControl.value,
-      "json" : this.jsonFormControl.value
+      "json" : this.jsonFormControl.value,
+      "input" : this.chatInputFormControl.value
     }
     this.apiservice.callGemini(JSON.stringify(geminiPayloads)).subscribe(data => {
       this.results.push(data.toString());
