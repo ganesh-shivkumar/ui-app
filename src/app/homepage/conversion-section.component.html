@@ -56,13 +56,14 @@
         </div>
       </mat-card-header>
       <mat-card-content class="gemini-chat-section">
-        <mat-list role="list">
-          <mat-list-item role="listitem" class="chat-card" *ngFor="let result of results">
-            <mat-card appearance="outlined">
-              <mat-card-content class="chat-card-content">{{ result }}</mat-card-content>
-            </mat-card>
-          </mat-list-item>
-      </mat-list>        
+        <div class="chat-card" *ngFor="let result of results">
+          <mat-card appearance="outlined" *ngIf="result.question" class="question-card">
+            <mat-card-content class="chat-card-content">{{ result.details }}</mat-card-content>
+          </mat-card>
+          <mat-card appearance="outlined" *ngIf="!result.question" class="answer-card">
+            <mat-card-content class="chat-card-content">{{ result.details }}</mat-card-content>
+          </mat-card>
+        </div>
       </mat-card-content>
       <mat-card-footer class="gemini-input-section">
         <mat-form-field appearance="outline" class="chat-input-section">

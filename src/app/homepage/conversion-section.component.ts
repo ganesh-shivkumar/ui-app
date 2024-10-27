@@ -8,6 +8,11 @@ export interface DialogData  {
   dialogDetails: string;
 }
 
+export interface ChatCard {
+  question: boolean;
+  details: string | null; 
+}
+
 @Component({
   selector: 'app-conversion-section',
   templateUrl: './conversion-section.component.html',
@@ -30,7 +35,7 @@ export class ConversionSectionComponent {
 
   readonly dialog = inject(MatDialog);
 
-  results : string[] = ['1111111','2222222222','33333333333333'];
+  results : ChatCard[] = [];
 
   openStatus() {
     const dialogRef = this.dialog.open(DetailsDialogComponent,  {
@@ -49,16 +54,28 @@ export class ConversionSectionComponent {
   }
 
   callGemini(){
-    this.ranTransaction = true;
+    this.sendToParent(true);
+
+    const qEntry : ChatCard = {
+      question: true,
+      details:  'Q : ' + this.chatInputFormControl.value
+    }
+    this.results.push(qEntry);
+
     const geminiPayloads = {
       "edi" : this.ediFormControl.value,
       "json" : this.jsonFormControl.value,
       "input" : this.chatInputFormControl.value
     }
     this.apiservice.callGemini(JSON.stringify(geminiPayloads)).subscribe(data => {
-      this.results.push(data.toString());
-      this.ranTransaction = false;
+      const aEntry : ChatCard = {
+        question: false,
+        details:  data.toString()
+      }
+      this.results.push(aEntry);
+      this.chatInputFormControl.setValue('');
       this.changeDetectorRef.detectChanges();
+      this.sendToParent(false);
     })
   }
 
@@ -75,8 +92,6 @@ export class ConversionSectionComponent {
           json = json.substring(0, json.indexOf("```"));
         }
         this.jsonFormControl.setValue(json);
-
-
         this.details = 'Completed!';
         this.sendToParent(false);
       });
