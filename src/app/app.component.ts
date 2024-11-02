@@ -11,8 +11,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ApiService } from './homepage/api_service';
 
 interface LoginResponse {
-  status?: string;
-  message?: string;
+  "status" : string;
+  "message" : string;
 }
 
 @Component({
@@ -65,11 +65,9 @@ export class AppComponent {
       }
       this.apiservice.login(JSON.stringify(loginPayload))
       .subscribe(data => {
-        console.log(data);
-        const loginResponse: LoginResponse = JSON.parse(data.toString())
+        const loginResponse: LoginResponse = JSON.parse(data.toString());
         this.errorDetails = loginResponse.message || '';
         this.inprogress = false;
       });
-  
   }
 }
