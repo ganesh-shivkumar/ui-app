@@ -1,1 +1,41 @@
 <router-outlet />
+
+<mat-progress-bar *ngIf="inprogress" mode="indeterminate"></mat-progress-bar>
+<div class="container">
+    <mat-card appearance="outlined" class="login-card">
+        <mat-card-header class="header-element">
+          <mat-card-title>{{headerTitle}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form>
+                <mat-form-field appearance="outline" class="login-full-width">
+                  <mat-label>Email</mat-label>
+                  <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+                  @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+                    <mat-error>Please enter a valid email address</mat-error>
+                  }
+                  @if (emailFormControl.hasError('required')) {
+                    <mat-error>Email is <strong>required</strong></mat-error>
+                  }
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="login-full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput [formControl]="passwordFormControl">
+                </mat-form-field>
+            </form>
+            <mat-error>{{errorDetails}}</mat-error>
+        </mat-card-content>
+        <div class="button-element" align="end" *ngIf="loginView">
+            <span class="button-label">New user?</span>
+            <span><button mat-button (click)="toggleView()">Create account</button></span>
+        </div>
+        <div class="button-element" align="end" *ngIf="!loginView">
+            <span class="button-label">Existing user?</span>
+            <span><button mat-button (click)="toggleView()">Login account</button></span>
+        </div>
+        <div class="button-element" align="center">
+            <button mat-flat-button (click)="login()">Submit</button>
+        </div>
+      </mat-card>
+</div>
+  
