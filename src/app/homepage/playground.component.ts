@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from './api_service';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsDialogComponent } from './details-dialog.component';
+import { ActivatedRoute , Router } from '@angular/router';
 
 export interface Tile {
   cols: number;
@@ -15,8 +16,17 @@ export interface Tile {
 })
 export class PlaygroundComponent implements OnInit{
 
-  constructor(private apiservice:ApiService) { }
+  constructor(private apiservice:ApiService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {}
+
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params =>{
+       const loginvalidated = params['loginvalidated'];
+       if(!loginvalidated){
+        this.router.navigate(['/']);
+       }
+    });
     this.getLatestTunedModel();
   }
 
@@ -63,7 +73,4 @@ export class PlaygroundComponent implements OnInit{
       this.tunedmodelDetails = data.toString();
     })
   }
-
-  
-
 }

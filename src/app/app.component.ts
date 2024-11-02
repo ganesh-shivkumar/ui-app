@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { HomepageModule } from './homepage/homepage.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ApiService } from './homepage/api_service';
+import { timer } from 'rxjs';
 
 interface LoginResponse {
   "status" : string;
@@ -33,7 +34,8 @@ interface LoginResponse {
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  constructor(private apiservice:ApiService) { }
+  constructor(private apiservice:ApiService, private router: Router, 
+  ) { }
 
   title = 'ui-app';
 
@@ -55,6 +57,12 @@ export class AppComponent {
   }
 
   login(){
+      if(this.emailFormControl.hasError('email') ||
+         this.emailFormControl.hasError('required') ||
+         this.passwordFormControl.hasError('required')){
+          alert('Fix the errors before submitting');
+          return
+      }
       this.inprogress = true;
 
       const action = (this.loginView) ?  'LOGIN' : 'CREATE';
@@ -67,7 +75,11 @@ export class AppComponent {
       .subscribe(data => {
         const loginResponse: LoginResponse = JSON.parse(data.toString());
         this.errorDetails = loginResponse.message || '';
-        this.inprogress = false;
+        if(loginResponse.status === 'SUCCESS'){
+          timer(2000).subscribe(() => {
+            this.inprogress = false;
+            this.router.navigate(['playground'],{queryParams: {'loginvalidated': true}, skipLocationChange: true}); }
+          )};
       });
   }
 }
