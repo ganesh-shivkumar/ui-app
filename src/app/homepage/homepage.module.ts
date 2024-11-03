@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DetailsDialogComponent } from './details-dialog.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { LoginComponent } from './login.component';
 
 @NgModule({
   imports: [
@@ -25,9 +26,9 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     MatDialogModule,
     MatProgressBarModule,
-    MatIconModule
+    MatIconModule,
   ],
-  declarations: [PlaygroundComponent, ConversionSectionComponent, DetailsDialogComponent],
-  exports : [PlaygroundComponent, ConversionSectionComponent, DetailsDialogComponent]
+  declarations: [PlaygroundComponent, ConversionSectionComponent, DetailsDialogComponent, LoginComponent],
+  exports : [PlaygroundComponent, ConversionSectionComponent, DetailsDialogComponent, LoginComponent]
 })
 export class HomepageModule { }

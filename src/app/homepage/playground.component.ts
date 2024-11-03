@@ -24,7 +24,7 @@ export class PlaygroundComponent implements OnInit{
     this.activatedRoute.queryParams.subscribe(params =>{
        const loginvalidated = params['loginvalidated'];
        if(!loginvalidated){
-        this.router.navigate(['/']);
+        this.router.navigate(['login']);
        }
     });
     this.getLatestTunedModel();
