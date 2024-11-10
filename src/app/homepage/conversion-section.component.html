@@ -40,8 +40,12 @@
         <p> {{details}} </p>
       </mat-card-content>
       <mat-card-actions *ngIf="ranTransaction">
-        <button mat-button (click)="openStatus()">Click to know more!</button>
-        <button mat-button (click)="validate()">Validate data for conformance</button>
+        <div class="button-status-element">
+          <button mat-raised-button (click)="openStatus()">Click to know more!</button>
+        </div>
+        <div class="button-status-element">
+          <button mat-flat-button (click)="validate()">Validate Data</button>
+        </div>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
