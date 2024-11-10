@@ -27,5 +27,10 @@ export class ApiService {
       const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
       return this._http.post('http://127.0.0.1:5000/api/user/login', body, {headers : headers});
     }
+
+    validate(body: string) {
+      const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+      return this._http.post('http://127.0.0.1:5000/api/validate', body, {headers : headers});
+    }
 }
   

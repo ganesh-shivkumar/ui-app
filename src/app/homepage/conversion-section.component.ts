@@ -8,6 +8,16 @@ export interface DialogData  {
   dialogDetails: string;
 }
 
+export interface ValidationData {
+  validation_results : ValidationRule[];
+}
+
+export interface ValidationRule {
+  rule: string;
+  result: string;
+  evidence: string;
+}
+
 export interface ChatCard {
   question: boolean;
   details: string | null; 
@@ -37,10 +47,37 @@ export class ConversionSectionComponent {
 
   results : ChatCard[] = [];
 
+  validate() {
+    this.sendToParent(true);
+    const geminiPayloads = {
+      "edi" : this.ediFormControl.value,
+      "json" : this.jsonFormControl.value,
+    }
+
+    this.apiservice.validate(JSON.stringify(geminiPayloads)).subscribe(data => {
+      const validationData : ValidationData = JSON.parse(data.toString());
+      console.log(validationData);
+
+      let dataForUi = "";
+      for(const rule of validationData.validation_results){
+        dataForUi = dataForUi + 'Rule : ' + rule.rule + '<br>'
+        dataForUi = dataForUi + 'Result : ' + rule.result + '<br>'
+        dataForUi = dataForUi + 'Reason : ' + rule.evidence + '<br>'
+        dataForUi = dataForUi + '<br>'
+      }
+      this.sendToParent(false);
+      this.openDialog(dataForUi)
+    });
+  }
+
   openStatus() {
+    this.openDialog(this.dialogDetails);
+  }
+
+  openDialog(details : string) {
     const dialogRef = this.dialog.open(DetailsDialogComponent,  {
       data: {
-        dialogDetails: this.dialogDetails,
+        dialogDetails: details,
       },
     });
 
